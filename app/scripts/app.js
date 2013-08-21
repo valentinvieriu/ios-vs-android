@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('yoApp', ['FacebookProvider']);
+var app = angular.module('yoApp', ['FacebookProvider','ngRoute']);
 app.config(function ($routeProvider,$locationProvider) {
     $routeProvider
       .when('/', {
