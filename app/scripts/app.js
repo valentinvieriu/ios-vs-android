@@ -1,6 +1,6 @@
 'use strict';
-var app = angular.module('yoApp', ['FacebookProvider','ngRoute']);
-app.config(function ($routeProvider,$locationProvider) {
+angular.module('iosVSAndroidApp', ['FacebookProvider','ngRoute'])
+.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -19,9 +19,9 @@ app.config(function ($routeProvider,$locationProvider) {
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
 
-app.run(function (Facebook, $rootScope, $location) {
+.run(function (Facebook, $rootScope, $location) {
     $rootScope.logged_in = false;
     $rootScope.fb_data   = {};
     $rootScope.$on('$routeChangeStart', function(event, next, current){

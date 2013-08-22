@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('yoApp')
-  .controller('LoginCtrl', function(Facebook, $scope, $rootScope, $http, $location) {
+angular.module('iosVSAndroidApp')
+.controller('LoginCtrl', function($scope, $rootScope, $location, Facebook) {
     $rootScope.$on('fb_connected', function () {
       $location.path('/')
     });

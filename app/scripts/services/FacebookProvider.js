@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('FacebookProvider',[])
-  .directive('fb', ['Facebook', function(Facebook) {
+  .directive('fb', function(Facebook) {
     return {
       restrict: 'E',
       replace: true,
@@ -30,7 +30,7 @@ angular.module('FacebookProvider',[])
         };
       }
     };
-  }])
+  })
   .factory('Facebook', function ($rootScope) {
     return {
       init:function(AppId){

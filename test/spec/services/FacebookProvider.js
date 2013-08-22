@@ -3,7 +3,7 @@
 describe('Service: FacebookProvider', function () {
 
   // load the service's module
-  beforeEach(module('yoApp'));
+  beforeEach(module('FacebookProvider'));
 
   // instantiate service
   var FacebookProvider;

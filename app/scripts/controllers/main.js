@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('yoApp')
-  .controller('MainCtrl', function (Facebook, $scope, $rootScope, $http, $location) {
+angular.module('iosVSAndroidApp')
+.controller('MainCtrl', function($scope, $rootScope, Facebook) {
 
     // if ( $rootScope.logged_in == false ) {
     //   $location.path('/login');
