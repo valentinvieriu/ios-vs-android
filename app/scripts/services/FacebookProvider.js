@@ -31,7 +31,42 @@ angular.module('FacebookProvider',[])
       }
     };
   })
-  .factory('Facebook', function ($rootScope) {
+  .factory('Facebook', function ($rootScope,$log) {
+
+    function _bucketFriends(data){
+      var iOS     =[];
+      var android =[];
+      var none    =[];
+      angular.forEach(data, function(el, key){
+        var _el       = el;
+        var iOS_count = 0;
+        if ( el.devices.length > 0 ) {
+          angular.forEach(el.devices, function(device, key){
+            if (device.os == 'iOS') {
+
+              if (iOS_count < 1) {
+                iOS.push(_el);
+              }
+
+              iOS_count ++ ;
+            }
+            else {
+              android.push(_el);
+            }
+          })
+
+        }
+        else {
+          none.push(el);
+        }
+      });
+      return {
+        "iOS"     :iOS,
+        "android" :android,
+        "none"    :none
+      }
+    }
+
     return {
       init:function(AppId){
         FB.init({
@@ -81,19 +116,17 @@ angular.module('FacebookProvider',[])
           });
       },
       getFriends:function () {
-          FB.api(
+          FB.api("/fql",
             {
-                method:'fql.multiquery',
-                queries:{
-                    'q1':'SELECT uid, name, devices FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '+ $rootScope.facebook_id + ') LIMIT 0,5000',
-                    'q2':'SELECT url FROM profile_pic WHERE width=800 AND height=800 AND id = ' + $rootScope.facebook_id
-                }
+                q:'SELECT uid, name,pic_square, devices FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '+ $rootScope.facebook_id + ') LIMIT 0,5000'
+
             },
-            function (data) {
-                //let's built the data to send to php in order to create our new user
-                $rootScope.fb_data.friends = data[0].fql_result_set;
-                $rootScope.fb_data.picture = data[1].fql_result_set[0].url;
-                $rootScope.$apply();
+            function (result) {
+              $log.log(result);
+              $rootScope.fb_data.friends = result.data;
+              $rootScope.fb_data.buckets = _bucketFriends(result.data);
+              // $rootScope.fb_data.groups = _.groupBy($rootScope.fb_data.friends, "device.os");
+              $rootScope.$apply();
             });
     }
     };

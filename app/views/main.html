@@ -18,10 +18,30 @@
 <button ng-click="unsubscribe()" ng-show="logged_in">unsubscribe</button>
 <hr>
 facebook status: {{fb_status}}
-<ul>
-    <li ng-repeat="friend in fb_data.friends" ng-show="friend.devices.length>0">{{friend.name}}
-      <ul>
-          <li ng-repeat="device in friend.devices">{{device.hardware || device.os}}</li>
-      </ul>
-    </li>
-</ul>
+Search: <input ng-model="searchFriend.name">
+<div class="row">
+  <div class="span4">
+    <h3>iOS</h3>
+    <ul>
+        <li ng-repeat="friend in fb_data.buckets.iOS | filter:searchFriend">
+          <img src="" ng-src={{friend.pic_square}} alt="">{{friend.name}}
+        </li>
+    </ul>
+  </div>
+  <div class="span4">
+    <h3>Android</h3>
+    <ul>
+        <li ng-repeat="friend in fb_data.buckets.android | filter:searchFriend">
+          <img src="" ng-src={{friend.pic_square}} alt="">{{friend.name}}
+        </li>
+    </ul>
+  </div>
+  <div class="span4">
+    <h3>Living in the past</h3>
+    <ul>
+        <li ng-repeat="friend in fb_data.buckets.none | filter:searchFriend">
+          <img src="" ng-src={{friend.pic_square}} alt="">{{friend.name}}
+        </li>
+    </ul>
+  </div>
+</div>
