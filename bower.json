@@ -9,7 +9,7 @@
     "angular-bootstrap" :"latest",
     "lodash"            :"latest",
     "json3"             : "~3.2.4",
-    "bootstrap-sass"    : "~2.3.1",
+    "sass-bootstrap"    : "~3.0.0",
     "es5-shim"          : "~2.0.8"
   },
   "devDependencies": {

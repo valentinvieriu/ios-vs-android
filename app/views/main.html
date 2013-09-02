@@ -1,47 +1,69 @@
-<div class="hero-unit">
-  <h1>'Allo, 'Allo!</h1>
-  <p>You now have</p>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
-</div>
-<button ng-click="getLoginStatus()" ng-show="logged_in">Get Facebook Status</button>
-<br>
-<button ng-click="login()" ng-show="!logged_in">Facebook Login</button>
-<br>
-<button ng-click="logout()" ng-show="logged_in">Facebook Logout</button>
-<br>
-<button ng-click="getFriends()" ng-show="logged_in">Get Friends</button>
-<hr>
-<button ng-click="unsubscribe()" ng-show="logged_in">unsubscribe</button>
-<hr>
-facebook status: {{fb_status}}
-Search: <input ng-model="searchFriend.name">
-<div class="row">
-  <div class="span4">
-    <h3>iOS</h3>
-    <ul>
-        <li ng-repeat="friend in fb_data.buckets.iOS | filter:searchFriend">
-          <img src="" ng-src={{friend.pic_square}} alt="">{{friend.name}}
-        </li>
-    </ul>
-  </div>
-  <div class="span4">
-    <h3>Android</h3>
-    <ul>
-        <li ng-repeat="friend in fb_data.buckets.android | filter:searchFriend">
-          <img src="" ng-src={{friend.pic_square}} alt="">{{friend.name}}
-        </li>
-    </ul>
-  </div>
-  <div class="span4">
-    <h3>Living in the past</h3>
-    <ul>
-        <li ng-repeat="friend in fb_data.buckets.none | filter:searchFriend">
-          <img src="" ng-src={{friend.pic_square}} alt="">{{friend.name}}
-        </li>
-    </ul>
-  </div>
-</div>
+    <!--[if lt IE 10]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+
+    <div class="header">
+        <ul class="nav nav-pills">
+            <li class="active"><a href="">Home</a></li>
+            <li><a href="" ng-click="getLoginStatus()" ng-show="logged_in">Get Facebook Status</a></li>
+            <li><a href="" ng-click="login()" ng-show="!logged_in">Facebook Login</a></li>
+            <li><a href="" ng-click="getFriends()" ng-show="logged_in">Get Friends</a></li>
+            <li><a href="" ng-click="unsubscribe()" ng-show="logged_in">unsubscribe</a></li>
+            <li><a href="" ng-click="logout()" ng-show="logged_in">Facebook Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1>'Allo, 'Allo!</h1>
+        <p class="lead">Always a pleasure scaffolding your apps.</p>
+        <p><a class="btn btn-lg btn-success btn-lg" href="#">Splendid!</a></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+        <div class="input-group">
+          <input type="text" class="form-control" ng-model="searchFriend.name">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-6">
+        <h3>iOS</h3>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="friend in fb_data.buckets.iOS | filter:searchFriend">
+              <img src="" ng-src={{friend.pic_square}} alt="{{friend.name}}" class="img-circle" />
+              {{friend.name}}
+            </li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-6">
+        <h3>Android</h3>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="friend in fb_data.buckets.android | filter:searchFriend">
+              <img src="" ng-src={{friend.pic_square}} alt="{{friend.name}}" class="img-circle" />
+              {{friend.name}}
+            </li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <h3>Living in the past</h3>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="friend in fb_data.buckets.none | filter:searchFriend">
+              <img src="" ng-src={{friend.pic_square}} alt="{{friend.name}}" class="img-circle" />
+              {{friend.name}}
+            </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+        <p>♥ from the Yeoman team</p>
+    </div>
+

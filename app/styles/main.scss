@@ -1,32 +1,17 @@
-$iconSpritePath: "../images/glyphicons-halflings.png";
-$iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
+$icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
-@import "bootstrap-sass/lib/bootstrap";
+@import 'sass-bootstrap/lib/bootstrap';
 
-/* Put your CSS here */
-html, body {
-  margin: 20px;
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
 }
 
+/* Space out content a bit */
 body {
-    background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #333;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-.hero-unit {
-    margin: 50px auto 0 auto;
-    width: 300px;
-    font-size: 18px;
-    font-weight: 200;
-    line-height: 30px;
-    background-color: #eee;
-    border-radius: 6px;
-    padding: 60px;
-}
-
-.hero-unit h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
-}
