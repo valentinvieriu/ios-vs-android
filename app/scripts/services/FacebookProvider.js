@@ -6,10 +6,19 @@ angular.module('FacebookProvider',[])
       restrict: 'E',
       replace: true,
       template: '<div id="fb-root"></div>',
+      controller: function($scope,$rootScope){
+        this.setAppId = function(appId){
+          $rootScope.config       = $rootScope.config || {};
+          $rootScope.config.appId = appId;
+        }
+      },
       compile: function(tElem, tAttrs) {
         return {
           post: function(scope, iElem, iAttrs, controller) {
             var fbAppId = iAttrs.appId || '';
+
+            controller.setAppId(fbAppId);
+
             // Setup the post-load callback
             window.fbAsyncInit = function () {
               Facebook.init(fbAppId);
@@ -31,50 +40,33 @@ angular.module('FacebookProvider',[])
       }
     };
   })
-  .factory('Facebook', function ($rootScope,$log) {
+  .directive('fbFacepile', function () {
+    return {
+      template : '<iframe scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:600px;" allowTransparency="true"></iframe>',
+      restrict : 'E',
+      replace  : true,
+      link: function postLink(scope, element, attrs) {
+        var fbUrl    = '//www.facebook.com/plugins/facepile.php?colorscheme=light&show_count=true';
+        var app_id   = '&app_id=' + attrs.appId;
+        var width    = '&width=' + (attrs.width || 600);
+        var size     = '&size=' + (attrs.size || 'large');
+        var max_rows = '&max_rows=' + (attrs.max_rows || '1');
 
-    function _bucketFriends(data){
-      var iOS     =[];
-      var android =[];
-      var none    =[];
-      angular.forEach(data, function(el, key){
-        var _el       = el;
-        var iOS_count = 0;
-        if ( el.devices.length > 0 ) {
-          angular.forEach(el.devices, function(device, key){
-            if (device.os == 'iOS') {
-
-              if (iOS_count < 1) {
-                iOS.push(_el);
-              }
-
-              iOS_count ++ ;
-            }
-            else {
-              android.push(_el);
-            }
-          })
-
-        }
-        else {
-          none.push(el);
-        }
-      });
-      return {
-        "iOS"     :iOS,
-        "android" :android,
-        "none"    :none
+        fbUrl = fbUrl + app_id + width + size + max_rows;
+        element.attr('src',fbUrl);
       }
     }
-
+  })
+  .factory('Facebook', function ($rootScope, $log, $q) {
     return {
-      init:function(AppId){
+      init:function(appId){
         FB.init({
-          appId  :AppId,
+          appId  :appId,
           status :true,
           cookie :true,
           xfbml  :true
         });
+
         // FB.getLoginStatus(function (response) {
         //     $rootScope.$broadcast("fb_statusChange", {'response': response});
         // });
@@ -118,7 +110,7 @@ angular.module('FacebookProvider',[])
       getFriends:function () {
           FB.api("/fql",
             {
-                q:'SELECT uid, name,pic_square, devices FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '+ $rootScope.facebook_id + ') LIMIT 0,5000'
+                q:'SELECT uid, name,mutual_friend_count,pic_square, devices FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '+ $rootScope.config.userId + ') LIMIT 0,5000'
 
             },
             function (result) {
@@ -128,6 +120,19 @@ angular.module('FacebookProvider',[])
               // $rootScope.fb_data.groups = _.groupBy($rootScope.fb_data.friends, "device.os");
               $rootScope.$apply();
             });
+    },
+      getFql:function (fql) {
+        var deferred = $q.defer();
+          FB.api("/fql",
+            {
+                q:fql
+
+            },
+            function (result) {
+              deferred.resolve(result);
+            });
+
+        return deferred.promise;
     }
     };
 });

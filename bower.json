@@ -1,19 +1,22 @@
 {
   "name": "iosVSAndroid",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {
-    "angular"           : "v1.2.0-rc.1",
-    "angular-route"     : "v1.2.0-rc.1",
-    "angular-cookies"   : "v1.2.0-rc.1",
-    "angular-animate"   : "v1.2.0-rc.1",
-    "angular-bootstrap" :"latest",
-    "lodash"            :"latest",
+    "angular"           : "1.2.0-rc.2",
+    "angular-route"     : "1.2.0-rc.2",
+    "angular-cookies"   : "1.2.0-rc.2",
+    "angular-animate"   : "1.2.0-rc.2",
+    "angular-bootstrap" : "latest",
+    "lodash"            : "latest",
     "json3"             : "~3.2.4",
     "sass-bootstrap"    : "~3.0.0",
-    "es5-shim"          : "~2.0.8"
+    "es5-shim"          : "~2.0.8",
+    "angular-blocks"    : "~0.1.8",
+    "animate.css"       : "latest",
+    "angular-bindonce"       : "latest"
   },
   "devDependencies": {
-    "angular-mocks"    : "v1.2.0-rc.1",
-    "angular-scenario" : "v1.2.0-rc.1"
+    "angular-mocks"    : "1.2.0-rc.2",
+    "angular-scenario" : "1.2.0-rc.2"
   }
 }

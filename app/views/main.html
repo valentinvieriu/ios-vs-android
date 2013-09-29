@@ -7,11 +7,11 @@
     <div class="header">
         <ul class="nav nav-pills">
             <li class="active"><a href="">Home</a></li>
-            <li><a href="" ng-click="getLoginStatus()" ng-show="logged_in">Get Facebook Status</a></li>
-            <li><a href="" ng-click="login()" ng-show="!logged_in">Facebook Login</a></li>
-            <li><a href="" ng-click="getFriends()" ng-show="logged_in">Get Friends</a></li>
-            <li><a href="" ng-click="unsubscribe()" ng-show="logged_in">unsubscribe</a></li>
-            <li><a href="" ng-click="logout()" ng-show="logged_in">Facebook Logout</a></li>
+            <li><a href="" ng-click="getLoginStatus()" ng-show="config.logged_in">Get Facebook Status</a></li>
+            <li><a href="" ng-click="login()" ng-show="!config.logged_in">Facebook Login</a></li>
+            <li><a href="" ng-click="getFriends()" ng-show="config.logged_in">Get Friends</a></li>
+            <li><a href="" ng-click="unsubscribe()" ng-show="config.logged_in">unsubscribe</a></li>
+            <li><a href="" ng-click="logout()" ng-show="config.logged_in">Facebook Logout</a></li>
         </ul>
     </div>
 
@@ -35,27 +35,27 @@
     </div>
     <div class="row">
       <div class="col-lg-4 col-md-4 col-sm-6">
-        <h3>iOS</h3>
+        <h3>iOS ({{fb_data.buckets.iOS.length}})</h3>
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="friend in fb_data.buckets.iOS | filter:searchFriend">
+            <li class="list-group-item" ng-repeat="friend in fb_data.buckets.iOS" ng-show="([friend] | filter:searchFriend).length > 0">
               <img src="" ng-src={{friend.pic_square}} alt="{{friend.name}}" class="img-circle" />
               {{friend.name}}
             </li>
         </ul>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-6">
-        <h3>Android</h3>
+        <h3>Android ({{fb_data.buckets.android.length}})</h3>
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="friend in fb_data.buckets.android | filter:searchFriend">
+            <li class="list-group-item" ng-repeat="friend in fb_data.buckets.android" ng-show="([friend] | filter:searchFriend).length > 0">
               <img src="" ng-src={{friend.pic_square}} alt="{{friend.name}}" class="img-circle" />
               {{friend.name}}
             </li>
         </ul>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-12">
-        <h3>Living in the past</h3>
+        <h3>Living in the past ({{fb_data.buckets.none.length}})</h3>
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="friend in fb_data.buckets.none | filter:searchFriend">
+            <li class="list-group-item" ng-repeat="friend in fb_data.buckets.none" ng-show="([friend] | filter:searchFriend).length > 0">
               <img src="" ng-src={{friend.pic_square}} alt="{{friend.name}}" class="img-circle" />
               {{friend.name}}
             </li>
@@ -64,6 +64,5 @@
     </div>
 
     <div class="footer">
-        <p>♥ from the Yeoman team</p>
     </div>
 

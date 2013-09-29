@@ -1,4 +1,9 @@
-<div class="hero-unit">
-  <h1>Welcome!</h1>
-  <p>You now have to <button ng-click="login()" ng-show="!logged_in">Facebook Login</button></p>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Do you have an Android or Iphone network?</h1>
+    <p class="lead">Always a pleasure scaffolding your apps.</p>
+    <p><a class="btn btn-lg btn-success btn-lg" href ng-click="login()" ng-show="!config.logged_in">Login with Facebook!</a></p>
+    <fb-facepile app-id="{{config.appId}}" width="600"/>
+
+  </div>
 </div>

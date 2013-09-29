@@ -1,6 +1,7 @@
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
+@import "compass/css3";
 
 .browsehappy {
     margin: 0.2em 0;
@@ -15,3 +16,17 @@ body {
     padding-bottom: 20px;
 }
 
+// .list-group-item.ng-hide-add,
+// .list-group-item.ng-hide-remove {
+//   @include transition(0.2s linear all);
+//   display:block!important;
+// }
+
+// .list-group-item.ng-hide-add.ng-hide-add-active,
+// .list-group-item.ng-hide-remove {
+//   @include opacity(0);
+// }
+// .list-group-item.ng-hide-add,
+// .list-group-item.ng-hide-remove.ng-hide-remove-active {
+//   @include opacity(1)
+// }
