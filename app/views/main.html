@@ -35,29 +35,29 @@
     </div>
     <div class="row">
       <div class="col-lg-4 col-md-4 col-sm-6">
-        <h3>iOS ({{fb_data.buckets.iOS.length}})</h3>
+        <h3>iOS (<span bindonce="fb_data.buckets" bo-text="fb_data.buckets.iOS.length"></span>)</h3>
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="friend in fb_data.buckets.iOS" ng-show="([friend] | filter:filter.query).length > 0">
-              <img src="" ng-src={{friend.pic_square}} alt="{{friend.name}}" class="img-circle" />
-              {{friend.name}}
+            <li bindonce class="list-group-item" ng-repeat="friend in fb_data.buckets.iOS" ng-show="([friend] | filter:searchFriend).length > 0">
+              <img width="50" height="50" src="" bo-src="friend.pic_square" bo-alt="friend.name" />
+              <span bo-text="friend.name"></span>
             </li>
         </ul>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-6">
-        <h3>Android ({{fb_data.buckets.android.length}})</h3>
+        <h3>Android (<span bindonce="fb_data.buckets" bo-text="fb_data.buckets.android.length"></span>)</h3>
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="friend in fb_data.buckets.android" ng-show="([friend] | filter:filter.query).length > 0">
-              <img src="" ng-src={{friend.pic_square}} alt="{{friend.name}}" class="img-circle" />
-              {{friend.name}}
+            <li bindonce class="list-group-item" ng-repeat="friend in fb_data.buckets.android" ng-show="([friend] | filter:searchFriend).length > 0">
+              <img width="50" height="50" src="" bo-src="friend.pic_square" bo-alt="friend.name" />
+              <span bo-text="friend.name"></span>
             </li>
         </ul>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-12">
-        <h3>Living in the past ({{fb_data.buckets.none.length}})</h3>
+        <h3>Living in the past (<span bindonce="fb_data.buckets" bo-text="fb_data.buckets.none.length"></span>)</h3>
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="friend in fb_data.buckets.none" ng-show="([friend] | filter:filter.query).length > 0">
-              <img src="" ng-src={{friend.pic_square}} alt="{{friend.name}}" class="img-circle" />
-              {{friend.name}}
+            <li bindonce class="list-group-item" ng-repeat="friend in fb_data.buckets.none" ng-show="([friend] | filter:searchFriend).length > 0">
+              <img width="50" height="50" src="" bo-src="friend.pic_square" bo-alt="friend.name" />
+              <span bo-text="friend.name"></span>
             </li>
         </ul>
       </div>

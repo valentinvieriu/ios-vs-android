@@ -1,18 +1,14 @@
 'use strict';
 
 angular.module('iosVSAndroidApp')
-.controller('MainCtrl', function($scope, $rootScope, Facebook, $log, $debounce) {
-
-  var applyQuery = function applyQuery() {
-      $scope.filter = {
-        query : $scope.searchFriend
-      };
-  };
+.controller('MainCtrl', function($scope, $rootScope, Facebook, $log) {
 
   var _bucketFriends = function _bucketFriends(data){
       var iOS     =[];
       var android =[];
       var none    =[];
+      var result  ={};
+      console.time("_bucketFriends");
       angular.forEach(data, function(el, key){
         var _el       = el;
         var iOS_count = 0;
@@ -41,40 +37,37 @@ angular.module('iosVSAndroidApp')
         }
       });
 
-
-      return {
+      result = {
         "iOS"     :_.sortBy(iOS, function(el) {return -el.mutual_friend_count}),
         "android" :_.sortBy(android, function(el) {return -el.mutual_friend_count}),
         "none"    :_.sortBy(none, function(el) {return -el.mutual_friend_count})
-      }
+      };
+      console.timeEnd("_bucketFriends");
+      return result;
     }
-    console.time("getFql");
-    var query = 'SELECT uid, name,mutual_friend_count,pic_square, devices FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '+ $rootScope.config.userId + ') LIMIT 0,5000';
-    Facebook.getFql(query).then(function(result){
-        console.timeEnd("getFql");
 
-        $rootScope.fb_data.buckets = _bucketFriends(result.data);
-    });
+  console.time("getFql");
+  var query = 'SELECT uid, name,mutual_friend_count,pic_square, devices FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '+ $rootScope.config.userId + ') LIMIT 0,5000';
+  Facebook.getFql(query).then(function(result){
+      console.timeEnd("getFql");
 
-    $scope.$watch('searchFriend', function(newValue, oldValue) {
-        if (newValue === oldValue) { return; }
-        $debounce(applyQuery, 350);
-    },true);
+      $rootScope.fb_data.buckets = _bucketFriends(result.data);
+  });
 
-    // button functions
-    $scope.getLoginStatus = function () {
-        Facebook.getLoginStatus();
-    };
+  // button functions
+  $scope.getLoginStatus = function () {
+      Facebook.getLoginStatus();
+  };
 
-    $scope.login = function () {
-        Facebook.login();
-    };
+  $scope.login = function () {
+      Facebook.login();
+  };
 
-    $scope.logout = function () {
-        Facebook.logout();
-    };
+  $scope.logout = function () {
+      Facebook.logout();
+  };
 
-    $scope.unsubscribe = function () {
-        Facebook.unsubscribe();
-    }
+  $scope.unsubscribe = function () {
+      Facebook.unsubscribe();
+  }
 });
