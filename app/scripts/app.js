@@ -22,10 +22,13 @@ angular.module('iosVSAndroidApp', ['FacebookProvider','ngRoute','pasvaz.bindonce
   })
 
 .run(function (Facebook, $rootScope, $location, $log) {
+    var scene = document.getElementById('scene');
+    var parallax = new Parallax(scene);
+
+    // $('#scene').parallax();
     $rootScope.config           = $rootScope.config || {};
 
     $rootScope.config.logged_in = false;
-    $rootScope.fb_data          = {};
     $rootScope.$on('$routeChangeStart', function(event, next, current){
       if ( $rootScope.config.logged_in === false && !next.access.isFree ) {
         $location.path('/login');

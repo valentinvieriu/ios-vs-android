@@ -84,14 +84,21 @@ angular.module('FacebookProvider',[])
               $rootScope.$broadcast("fb_statusChange", {'response':response});
           }, true);
       },
-      login:function () {
-          FB.login(function (response) {
-              if (response.authResponse) {
-                  $rootScope.$broadcast('fb_connected');
-              } else {
-                  $rootScope.$broadcast('fb_login_failed');
-              }
-          }, {scope:'read_stream, publish_stream, email'});
+      login:function (_scope) {
+        var deferred = $q.defer();
+        var scope = _scope || '';
+
+        FB.login(function (response) {
+            if (response.authResponse) {
+                $rootScope.$broadcast('fb_connected');
+                deferred.resolve(response);
+            } else {
+                $rootScope.$broadcast('fb_login_failed');
+                deferred.reject(response);
+            }
+
+        }, {scope:scope});
+        return deferred.promise;
       },
       logout:function () {
           FB.logout(function (response) {
@@ -121,18 +128,36 @@ angular.module('FacebookProvider',[])
               $rootScope.$apply();
             });
     },
-      getFql:function (fql) {
-        var deferred = $q.defer();
-          FB.api("/fql",
-            {
-                q:fql
-
-            },
-            function (result) {
+    ui:function (config) {
+      var deferred = $q.defer();
+        FB.ui(config,
+          function (result) {
+            console.log(result);
+            if (result) {
+              $rootScope.$broadcast("fb_socialAction", {'response':config.method});
               deferred.resolve(result);
-            });
+            }
+            else {
+              deferred.reject('Canceled');
+            }
 
-        return deferred.promise;
+          });
+
+      return deferred.promise;
+    },
+    getFql:function (fql) {
+      var deferred = $q.defer();
+        FB.api("/fql",
+          {
+              q:fql
+
+          },
+          function (result) {
+            deferred.resolve(result);
+          });
+
+      return deferred.promise;
     }
     };
-});
+  })
+  .value('fbData', {});
