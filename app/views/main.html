@@ -1,70 +1,63 @@
-    <!--[if lt IE 10]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+<ul class="nav nav-pills pull-right">
+    <li><a href="" ng-click="unsubscribe()" title="Remove Application" ng-show="config.logged_in"><i class="glyphicon glyphicon-log-out"></i></a></li>
+</ul>
 
 
+<div class="jumbotron">
+  <div class="container">
+    <h2>{{title}}</h2>
+    <p class="lead" ng-hide="workInProgress">If you like our app make sure that you spread the word. <a href="" ng-click="appRequest()" >Let you friends know</a> about this cool app.</p>
+    <p><a class="btn btn-lg btn-primary" href="" ng-click="share()"><i class="glyphicon glyphicon-share"></i> Share this!</a></p>
+  </div>
+</div>
 
+<div ng-hide="workInProgress" id="search-box" class="row">
+  <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+    <div class="input-group">
+      <input type="text" placeholder="Search for your friends" class="form-control input-lg" ng-model="searchFriend.name">
+      <span class="input-group-btn">
+        <button class="btn btn-default btn-lg" type="button"><span class="glyphicon glyphicon-search"></span></button>
+      </span>
+    </div>
+  </div>
+</div>
+<div ng-hide="workInProgress" class="row">
+  <div class="col-md-4 col-xs-6">
 
-    <ul class="nav nav-pills pull-right">
-        <li><a href="" ng-click="unsubscribe()" title="Remove Application" ng-show="config.logged_in"><i class="glyphicon glyphicon-log-out"></i></a></li>
+    <ul class="list-group">
+        <li class="list-group-item">
+          <h4>iOS (<span bindonce="fb_data.iOS" bo-text="fb_data.iOS"></span>)</h4>
+        </li>
+        <li bindonce class="list-group-item" ng-repeat="friend in fb_data.buckets.iOS" ng-show="([friend] | filter:searchFriend).length > 0">
+          <img width="50" height="50" src="" bo-src="friend.pic_square" bo-alt="friend.name" />
+          <strong bo-text="friend.name"></strong>
+        </li>
     </ul>
+  </div>
+  <div class="col-md-4 col-xs-6">
+    <ul class="list-group">
+        <li class="list-group-item">
+          <h4>Android (<span bindonce="fb_data.android" bo-text="fb_data.android"></span>)</h4>
+        </li>
+        <li bindonce class="list-group-item" ng-repeat="friend in fb_data.buckets.android" ng-show="([friend] | filter:searchFriend).length > 0">
+          <img width="50" height="50" src="" bo-src="friend.pic_square" bo-alt="friend.name" />
+          <strong bo-text="friend.name"></strong>
+        </li>
+    </ul>
+  </div>
+  <div class="col-md-4 hidden-sm hidden-xs">
+    <ul class="list-group">
+        <li class="list-group-item">
+          <h4>Living in the past (<span bindonce="fb_data.none" bo-text="fb_data.none"></span>)</h4>
+        </li>
+        <li bindonce class="list-group-item" ng-repeat="friend in fb_data.buckets.none" ng-show="([friend] | filter:searchFriend).length > 0">
+          <img width="50" height="50" src="" bo-src="friend.pic_square" bo-alt="friend.name" />
+          <strong bo-text="friend.name"></strong>
+        </li>
+    </ul>
+  </div>
+</div>
 
-
-    <div class="jumbotron">
-      <div class="container">
-        <h2>{{title}}</h2>
-        <p class="lead" ng-hide="workInProgress">If you like our app make sure that you spread the word. <a href="" ng-click="appRequest()" >Let you friends know</a> about this cool app.</p>
-        <p><a class="btn btn-lg btn-primary" href="" ng-click="share()"><i class="glyphicon glyphicon-share"></i> Share this!</a></p>
-      </div>
-    </div>
-
-    <div ng-hide="workInProgress" id="search-box" class="row">
-      <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
-        <div class="input-group">
-          <input type="text" placeholder="Search for your friends" class="form-control input-lg" ng-model="searchFriend.name">
-          <span class="input-group-btn">
-            <button class="btn btn-default btn-lg" type="button"><span class="glyphicon glyphicon-search"></span></button>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div ng-hide="workInProgress" class="row">
-      <div class="col-md-4 col-xs-6">
-
-        <ul class="list-group">
-            <li class="list-group-item">
-              <h4>iOS (<span bindonce="fb_data.iOS" bo-text="fb_data.iOS"></span>)</h4>
-            </li>
-            <li bindonce class="list-group-item" ng-repeat="friend in fb_data.buckets.iOS" ng-show="([friend] | filter:searchFriend).length > 0">
-              <img width="50" height="50" src="" bo-src="friend.pic_square" bo-alt="friend.name" />
-              <strong bo-text="friend.name"></strong>
-            </li>
-        </ul>
-      </div>
-      <div class="col-md-4 col-xs-6">
-        <ul class="list-group">
-            <li class="list-group-item">
-              <h4>Android (<span bindonce="fb_data.android" bo-text="fb_data.android"></span>)</h4>
-            </li>
-            <li bindonce class="list-group-item" ng-repeat="friend in fb_data.buckets.android" ng-show="([friend] | filter:searchFriend).length > 0">
-              <img width="50" height="50" src="" bo-src="friend.pic_square" bo-alt="friend.name" />
-              <strong bo-text="friend.name"></strong>
-            </li>
-        </ul>
-      </div>
-      <div class="col-md-4 hidden-sm hidden-xs">
-        <ul class="list-group">
-            <li class="list-group-item">
-              <h4>Living in the past (<span bindonce="fb_data.none" bo-text="fb_data.none"></span>)</h4>
-            </li>
-            <li bindonce class="list-group-item" ng-repeat="friend in fb_data.buckets.none" ng-show="([friend] | filter:searchFriend).length > 0">
-              <img width="50" height="50" src="" bo-src="friend.pic_square" bo-alt="friend.name" />
-              <strong bo-text="friend.name"></strong>
-            </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer">
-    </div>
+<div class="footer">
+</div>
 
