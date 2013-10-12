@@ -1,19 +1,19 @@
-$icon-font-path: "/bower_components/sass-bootstrap/fonts/";
+$icon-font-path: "/styles/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
 @import "compass/css3";
 
 .browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
+    margin     : 0.2em 0;
+    background : #ccc;
+    color      : #000;
+    padding    : 0.2em 0;
 }
 
 /* Space out content a bit */
 body {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top    : 20px;
+    padding-bottom : 20px;
 }
 #search-box {
   margin-bottom: $line-height-computed;
@@ -32,7 +32,13 @@ body {
 // .list-group-item.ng-hide-remove.ng-hide-remove-active {
 //   @include opacity(1)
 // }
-
+.list-group-item {
+  img {
+    @media (max-width: $screen-xs) {
+      display: none;
+    }
+  }
+}
 .accelerate {
   @include translateZ(0);
   @include transform-style(preserve-3d);
@@ -50,38 +56,43 @@ body {
 
 
 .center {
-  max-width: 400px;
-  margin: 0 auto;
-  width: 88%; }
+  max-width : 400px;
+  margin    : 0 auto;
+  width     : 88%;
+}
 
 .wrapper {
-  min-height: 460px;
-  position: absolute;
-  overflow: hidden;
-  display: table;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0; }
+  // min-height: 460px;
+  position : absolute;
+  top      : 0;
+  left     : 0;
+  display  : table;
+  overflow : hidden;
+  width    : 100%;
+  height   : 100%;
+}
 .scene,
 .layer {
-  display: block;
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: 0; }
+  display : block;
+  margin  : 0;
+  padding : 0;
+  width   : 100%;
+  height  : 100%;
+}
 
 .scene {
-  min-height: 460px;
-  position: fixed;
-  overflow: hidden;
-  background-color: #f1e8e9; }
+  position         : fixed;
+  overflow         : hidden;
+  min-height       : 460px;
+  background-color : #f1e8e9;
+}
 .background {
-  background: url(../images/background1.jpg) no-repeat 50% 100%;
-  bottom: -15%;
-  background-size: cover;
-  position: absolute;
-  width: 130%;
-  left: -15%;
-  top: -15%; }
+  position        : absolute;
+  top             : -15%;
+  bottom          : -15%;
+  left            : -15%;
+  width           : 130%;
+  background      : url(../images/background1.jpg) no-repeat 50% 100%;
+  background-size : cover;
+}
 

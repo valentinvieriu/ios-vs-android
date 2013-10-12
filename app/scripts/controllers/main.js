@@ -107,7 +107,7 @@ angular.module('iosVSAndroidApp')
     var wall_post_message = {
       method      : 'feed',
       link        : 'https://apps.facebook.com/ios_vs_android',
-      picture     : 'http://ios-vs-android.herokuapp.com/img/wall'+Math.floor(Math.random()*9) +'.jpeg',
+      picture     : 'http://ios-vs-android.herokuapp.com/images/970a1f89.share.jpg',
       name        : 'See if your friends are using iOS or Android.',
       caption     : '',
       description : 'Try a cool Facebook application that tells you what type of smart phone your friends use.',
@@ -118,7 +118,13 @@ angular.module('iosVSAndroidApp')
         }
       }
     };
-    Facebook.ui(wall_post_message);
+    // Facebook.ui(wall_post_message);
+    var url = encodeURIComponent('http://ios-vs-android.herokuapp.com/');
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+url,
+      'facebook-share-dialog',
+      'width=626,height=436,top='+(screen.height-436)/2+',left='+(screen.width-626)/2);
+
   };
 
 });
