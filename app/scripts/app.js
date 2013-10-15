@@ -1,41 +1,39 @@
 'use strict';
 angular.module('iosVSAndroidApp', ['FacebookProvider','ngRoute','pasvaz.bindonce'])
 .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        access:{
-          isFree:false
-        }
-      })
-      .when('/login', {
-        templateUrl: 'views/login.html',
-        controller: 'LoginCtrl',
-        access:{
-          isFree:true
-        }
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
+  $routeProvider
+    .when('/', {
+      templateUrl: 'views/main.html',
+      controller: 'MainCtrl',
+      access:{
+        isFree:false
+      }
+    })
+    .when('/login', {
+      templateUrl: 'views/login.html',
+      controller: 'LoginCtrl',
+      access:{
+        isFree:true
+      }
+    })
+    .otherwise({
+      redirectTo: '/'
+    });
+
   })
 
-.run(function (Facebook, $rootScope, $location, $log) {
-    var scene = document.getElementById('scene');
-    var parallax = new Parallax(scene);
-
-    // $('#scene').parallax();
+.run(function (Facebook, Parallax, processData, fbData, $rootScope, $location, $log) {
     $rootScope.config           = $rootScope.config || {};
-
+    $rootScope.fb_data          = $rootScope.fb_data || {};
     $rootScope.config.logged_in = false;
+    $rootScope.workInProgress   = true;
     $rootScope.$on('$routeChangeStart', function(event, next, current){
       if ( $rootScope.config.logged_in === false && !next.access.isFree ) {
         $location.path('/login');
       };
     });
     $rootScope.$on("fb_statusChange", function (event, args) {
-      $log.log(args);
+      // $log.log(args);
 
       switch (args.response.status) {
         case 'connected':
@@ -57,6 +55,20 @@ angular.module('iosVSAndroidApp', ['FacebookProvider','ngRoute','pasvaz.bindonce
 
     });
 
+  $rootScope.$on('fb_connected', function () {
+    var query1 = 'SELECT uid, name,mutual_friend_count,pic_square, devices FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '+ $rootScope.config.userId + ') LIMIT 0,5000';
+    Facebook.getFql(query1).then(function(result){
+      fbData                    = processData.bucketFriends(result.data);
+      $rootScope.fb_data        = fbData;
+      $rootScope.workInProgress = false;
+    });
+
+    var query2 = 'SELECT uid,pic_square, devices FROM user WHERE uid = '+ $rootScope.config.userId;
+    Facebook.getFql(query2).then(function(result){
+      // fbData.userData         = result.data;
+      $rootScope.fb_data.userData = result.data;
+    });
+  });
     $rootScope.$on('fb_login_failed', function () {
       $log.log('fb_login_failed');
     });
@@ -65,14 +77,6 @@ angular.module('iosVSAndroidApp', ['FacebookProvider','ngRoute','pasvaz.bindonce
       $rootScope.fb_data          = {};
       $log.log('fb_logout_succeded');
       $location.path('/login');
-    });
-    $rootScope.$on('fb_logout_failed', function () {
-      $log.log('fb_logout_failed!');
-    });
-
-    $rootScope.$on('fb_connected', function () {
-      var query = 'SELECT uid,pic_square, devices FROM user WHERE uid = '+ $rootScope.config.userId;
-      Facebook.getFql(query);
     });
 
 });

@@ -145,6 +145,12 @@ angular.module('FacebookProvider',[])
 
       return deferred.promise;
     },
+    classicShare:function (url) {
+      window.open(
+        'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url),
+        'facebook-share-dialog',
+        'width=626,height=436,top='+(screen.height-436)/2+',left='+(screen.width-626)/2);
+    },
     getFql:function (fql) {
       var deferred = $q.defer();
         FB.api("/fql",
