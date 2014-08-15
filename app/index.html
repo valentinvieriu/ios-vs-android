@@ -1,94 +1,102 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="no-js">
   <head>
-  <meta charset="utf-8">
-  <title>iOS versus Android - Find out what type of devices your friends are using</title>
-  <!-- Behavioral Meta Data -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <!-- Core Meta Data -->
-  <meta name="author" content="Valentin Vieriu">
-  <meta name="description" content="A cool Facebook application that tells you what type of smart phone your friends use.">
-  <meta name="keywords" content="parallax,javascript,jquery,zepto,plugin">
-  <!-- Open Graph Meta Data -->
-  <meta property="og:site_name" content="iOS vs Android "/>
-  <meta property="og:title" content="See if your friends are using iOS or Android." />
-  <meta property="og:url" content="http://ios-vs-android.herokuapp.com" />
-  <meta property="og:image" content="http://ios-vs-android.herokuapp.com/og-image1.jpg" />
-  <meta property="og:image" content="http://ios-vs-android.herokuapp.com/og-image2.jpg" />
-  <meta property="og:image" content="http://ios-vs-android.herokuapp.com/og-image3.jpg" />
-  <meta property="og:description" content="Try a cool Facebook application that tells you what type of smart phone your friends use." />
+    <meta charset="utf-8">
+    <title>iOS versus Android - Find out what type of devices your friends are using</title>
+    <!-- Behavioral Meta Data -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- Core Meta Data -->
+    <meta name="author" content="Valentin Vieriu">
+    <meta name="description" content="A cool Facebook application that tells you what type of smart phone your friends use.">
+    <meta name="keywords" content="parallax,javascript,jquery,zepto,plugin">
+    <!-- Open Graph Meta Data -->
+    <meta property="og:site_name" content="iOS vs Android "/>
+    <meta property="og:title" content="See if your friends are using iOS or Android." />
+    <meta property="og:url" content="http://ios-vs-android.herokuapp.com" />
+    <meta property="og:image" content="http://ios-vs-android.herokuapp.com/og-image1.jpg" />
+    <meta property="og:image" content="http://ios-vs-android.herokuapp.com/og-image2.jpg" />
+    <meta property="og:image" content="http://ios-vs-android.herokuapp.com/og-image3.jpg" />
+    <meta property="og:description" content="Try a cool Facebook application that tells you what type of smart phone your friends use." />
 
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- build:css({.tmp,app}) styles/main.css -->
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-</head>
-  <body ng-app="iosVSAndroidApp">
-  <!--[if lt IE 7]>
-    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
+  </head>
+  <body ng-app="iosVsAndroidApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-  <!--[if lt IE 9]>
-    <!-- build:js scripts/shims.js -->
+    <!-- Add your site or application content here -->
+    <div id="bg-container" class="wrapper">
+      <ul id="scene" class="scene unselectable"
+        data-friction-x="0.1"
+        data-friction-y="0.1"
+        data-scalar-x="25"
+        data-scalar-y="15">
+        <li class="layer" data-depth="0.00"></li>
+        <li class="layer" data-depth="0.15"><div class="background"></div></li>
+      </ul>
+    </div>
+    <div class="container" ng-view=""></div>
+
+    <fb app-id="390729450981027"></fb>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-783279-13');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
     <!-- endbuild -->
-  <![endif]-->
 
-  <!-- Add your site or application content here -->
-  <div id="bg-container" class="wrapper">
-    <ul id="scene" class="scene unselectable"
-      data-friction-x="0.1"
-      data-friction-y="0.1"
-      data-scalar-x="25"
-      data-scalar-y="15">
-      <li class="layer" data-depth="0.00"></li>
-      <li class="layer" data-depth="0.15"><div class="background"></div></li>
-    </ul>
-  </div>
-  <div class="container" ng-view=""></div>
-
-  <fb app-id="390729450981027"></fb>
-
-
-    <!-- build:js scripts/plugins.js -->
+    <!-- build:js(.) scripts/vendor.js -->
     <script src="bower_components/parallax/deploy/parallax.js"></script>
-    <!-- endbuild -->
-
-    <!-- build:js scripts/modules.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-bindonce/bindonce.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/parallax/deploy/parallax.min.js"></script>
+    <script src="bower_components/parallax/deploy/jquery.parallax.js"></script>
+    <script src="bower_components/parallax/deploy/jquery.parallax.min.js"></script>
+    <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/services/FacebookProvider.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/login.js"></script>
-    <script src="scripts/services/parallax.js"></script>
-    <script src="scripts/services/processData.js"></script>
-    <script src="scripts/filters/percent.js"></script>
-    <!-- endbuild -->
-
-    <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-783279-13']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script>
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/services/FacebookProvider.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/services/parallax.js"></script>
+        <script src="scripts/services/processData.js"></script>
+        <script src="scripts/filters/percent.js"></script>
+        <!-- endbuild -->
 </body>
 </html>

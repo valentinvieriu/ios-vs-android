@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: LoginCtrl', function () {
+describe('Controller: AboutCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('iosVSAndroidApp'));
+  beforeEach(module('iosVsAndroidApp'));
 
-  var LoginCtrl,
+  var AboutCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    LoginCtrl = $controller('LoginCtrl', {
+    AboutCtrl = $controller('AboutCtrl', {
       $scope: scope
     });
   }));

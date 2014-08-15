@@ -1,5 +1,5 @@
 'use strict';
-angular.module('iosVSAndroidApp', ['FacebookProvider','ngRoute','pasvaz.bindonce'])
+angular.module('iosVsAndroidApp', ['FacebookProvider','ngRoute'])
 .config(function ($routeProvider) {
   $routeProvider
     .when('/', {

@@ -1,0 +1,170 @@
+/* ------------------------------------------- */
+/* Mixins
+/* ------------------------------------------- */
+
+@mixin transitionDuration ($duration) {
+  transition-duration: $duration;
+  -webkit-transition-duration: $duration;
+}
+
+@mixin easingTimingFunction () {
+  -webkit-transition: all 0 cubic-bezier(0.250, 0.460, 0.450, 0.940);
+  -moz-transition: all 0 cubic-bezier(0.250, 0.460, 0.450, 0.940);
+  -ms-transition: all 0 cubic-bezier(0.250, 0.460, 0.450, 0.940);
+   -o-transition: all 0 cubic-bezier(0.250, 0.460, 0.450, 0.940);
+      transition: all 0 cubic-bezier(0.250, 0.460, 0.450, 0.940); /* easeOutQuad */
+
+  -webkit-transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+  -moz-transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+  -ms-transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+   -o-transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+      transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940); /* easeOutQuad */
+}
+
+@mixin bouncyTimingFunction () {
+  -webkit-transition: all 0 cubic-bezier(0.175, 0.885, 0.320, 1); /* older webkit */
+  -webkit-transition: all 0 cubic-bezier(0.175, 0.885, 0.320, 1.275);
+     -moz-transition: all 0 cubic-bezier(0.175, 0.885, 0.320, 1.275);
+      -ms-transition: all 0 cubic-bezier(0.175, 0.885, 0.320, 1.275);
+       -o-transition: all 0 cubic-bezier(0.175, 0.885, 0.320, 1.275);
+          transition: all 0 cubic-bezier(0.175, 0.885, 0.320, 1.275); /* easeOutBack */
+
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.450, 1); /* older webkit */
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.450, 1.595);
+     -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.450, 1.595);
+      -ms-transition-timing-function: cubic-bezier(0.175, 0.885, 0.450, 1.595);
+       -o-transition-timing-function: cubic-bezier(0.175, 0.885, 0.450, 1.595);
+          transition-timing-function: cubic-bezier(0.175, 0.885, 0.450, 1.595); /* custom */
+}
+
+@mixin easingOutQuadTimingFunction () {
+  -webkit-transition: all 0 cubic-bezier(0.250, 0.460, 0.450, 0.940);
+     -moz-transition: all 0 cubic-bezier(0.250, 0.460, 0.450, 0.940);
+      -ms-transition: all 0 cubic-bezier(0.250, 0.460, 0.450, 0.940);
+       -o-transition: all 0 cubic-bezier(0.250, 0.460, 0.450, 0.940);
+          transition: all 0 cubic-bezier(0.250, 0.460, 0.450, 0.940); /* easeOutQuad */
+
+  -webkit-transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+     -moz-transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+      -ms-transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+       -o-transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+          transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940); /* easeOutQuad */
+}
+
+@mixin customTransform ($value) {
+  transform: $value;
+  -ms-transform: $value;
+  -webkit-transform: $value;
+}
+
+
+
+
+/* ------------------------------------------- */
+/* Spin Fade
+/* ------------------------------------------- */
+
+.spin-toggle {
+  @include easingTimingFunction();
+
+  &.ng-enter {
+    @include customTransform(rotate(225deg));
+    @include transitionDuration(250ms);
+    opacity: 0;
+  }
+
+  &.ng-enter-active {
+    @include customTransform(rotate(0deg));
+    opacity: 1;
+  }
+
+  &.ng-leave {
+    @include customTransform(rotate(0deg));
+    @include transitionDuration(250ms);
+    opacity: 1;
+  }
+
+  &.ng-leave-active {
+    @include customTransform(rotate(90deg));
+    opacity: 0;
+  }
+
+  // Hide
+  &.ng-hide-add {
+    @include customTransform(rotate(0deg));
+    @include transitionDuration(250ms);
+    opacity:1;
+  }
+  &.ng-hide-add.ng-hide-add-active {
+    @include customTransform(rotate(90deg));
+    opacity:0;
+  }
+
+  // Show
+  &.ng-hide-remove {
+    @include customTransform(rotate(225deg));
+    @include transitionDuration(250ms);
+    display:block!important;
+    opacity:0;
+  }
+  &.ng-hide-remove.ng-hide-remove-active {
+    @include customTransform(rotate(0deg));
+    opacity:1;
+  }
+}
+
+
+
+/* ------------------------------------------- */
+/* Scale in Fade
+/* ------------------------------------------- */
+
+.scale-fade-in {
+  @include easingOutQuadTimingFunction();
+
+  &.ng-enter {
+    @include customTransform(scale(3));
+    @include transitionDuration(250ms);
+    opacity: 0;
+  }
+
+  &.ng-enter-active {
+    @include customTransform(scale(1));
+    opacity: 1;
+  }
+
+  &.ng-leave {
+    @include customTransform(scale(1));
+    @include transitionDuration(250ms);
+    opacity: 1;
+  }
+
+  &.ng-leave-active {
+    @include customTransform(scale(3));
+    opacity: 0;
+  }
+
+  // Hide
+  &.ng-hide-add {
+    @include customTransform(scale(1));
+    @include transitionDuration(250ms);
+    opacity:1;
+  }
+  &.ng-hide-add.ng-hide-add-active {
+    @include customTransform(scale(3));
+    opacity:0;
+  }
+
+  // Show
+  &.ng-hide-remove {
+    @include customTransform(scale(3));
+    @include transitionDuration(250ms);
+    display:block!important;
+    opacity:0;
+  }
+  &.ng-hide-remove.ng-hide-remove-active {
+    @include customTransform(scale(1));
+    opacity:1;
+  }
+}
+

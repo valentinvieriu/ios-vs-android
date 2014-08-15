@@ -1,4 +1,4 @@
 'use strict';
 
-angular.module('iosVSAndroidApp')
+angular.module('iosVsAndroidApp')
   .value('Parallax', new window.Parallax(document.getElementById('scene')) );

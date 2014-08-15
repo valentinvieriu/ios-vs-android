@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('iosVSAndroidApp')
+angular.module('iosVsAndroidApp')
 .controller('MainCtrl', function($scope, $rootScope, Facebook) {
 
   // button functions

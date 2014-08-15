@@ -1,7 +1,4 @@
-$icon-font-path: "/styles/fonts/";
-
-@import "bootstrap";
-@import "compass/css3";
+@import "_bootstrap.less";
 
 .browsehappy {
     margin     : 0.2em 0;
@@ -16,7 +13,7 @@ body {
     padding-bottom : 20px;
 }
 #search-box {
-  margin-bottom: $line-height-computed;
+  margin-bottom: @line-height-computed;
 }
 // .list-group-item.ng-hide-add,
 // .list-group-item.ng-hide-remove {
@@ -34,19 +31,22 @@ body {
 // }
 .list-group-item {
   img {
-    @media (max-width: $screen-xs) {
+    @media (max-width: @screen-xs) {
       display: none;
     }
   }
 }
-.accelerate {
-  @include translateZ(0);
-  @include transform-style(preserve-3d);
-  @include backface-visibility(hidden);
-}
+// .accelerate {
+//   @include translateZ(0);
+//   @include transform-style(preserve-3d);
+//   @include backface-visibility(hidden);
+// }
 
 .container {
-  @extend .accelerate;
+  transform:translateZ(0);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+
 }
 .jumbotron,
 .list-group-item {
