@@ -18,7 +18,7 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: 'dist/public'
   };
 
   // Define the configuration for all the tasks
@@ -171,7 +171,8 @@ module.exports = function (grunt) {
       },
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  /\.\.\//
+        ignorePath:  /\.\.\//,
+        exclude:["bootstrap","jquery"]
       }
     },
 
@@ -214,6 +215,21 @@ module.exports = function (grunt) {
       }
     },
 
+    // Inining the views
+    inline_angular_templates: {
+      dist: {
+        options: {
+            base: '<%= yeoman.app %>', // (Optional) ID of the <script> tag will be relative to this folder. Default is project dir.
+            prefix: '',            // (Optional) Prefix path to the ID. Default is empty string.
+            selector: 'body',       // (Optional) CSS selector of the element to use to insert the templates. Default is `body`.
+            method: 'append'       // (Optional) DOM insert method. Default is `prepend`.
+        },
+        files: {
+            '<%= yeoman.dist %>/index.html': ['<%= yeoman.app %>/views/**/*.html']
+        }
+      }
+    },
+    
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so
     // additional tasks can operate on them
@@ -238,7 +254,7 @@ module.exports = function (grunt) {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/images']
+        assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/images','<%= yeoman.dist %>/styles/fonts']
       }
     },
 
@@ -341,9 +357,9 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
-            'views/{,*/}*.html',
+            // 'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'fonts/*'
+            'styles/fonts/*'
           ]
         }, {
           expand: true,
@@ -433,6 +449,7 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'filerev',
+    'inline_angular_templates',
     'usemin',
     'htmlmin'
   ]);

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('iosVsAndroidApp')
-  .factory('processData', function ($rootScope, Facebook) {
+  .factory('processData', function ($rootScope, _, Facebook) {
     function bucketFriends(data){
       var iOS     =[];
       var android =[];

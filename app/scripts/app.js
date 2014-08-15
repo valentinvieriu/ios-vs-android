@@ -1,6 +1,7 @@
 'use strict';
 angular.module('iosVsAndroidApp', ['FacebookProvider','ngRoute'])
-.config(function ($routeProvider) {
+.config(function ($routeProvider, $locationProvider) {
+  $locationProvider.html5Mode(true);
   $routeProvider
     .when('/', {
       templateUrl: 'views/main.html',
@@ -22,7 +23,7 @@ angular.module('iosVsAndroidApp', ['FacebookProvider','ngRoute'])
 
   })
 
-.run(function (Facebook, Parallax, processData, fbData, $rootScope, $location, $log) {
+.run(function (Facebook, processData, fbData, $rootScope, $location, $log) {
     $rootScope.config           = $rootScope.config || {};
     $rootScope.fb_data          = $rootScope.fb_data || {};
     $rootScope.config.logged_in = false;

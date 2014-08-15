@@ -57,7 +57,7 @@ angular.module('FacebookProvider',[])
       }
     }
   })
-  .factory('Facebook', function ($rootScope, $log, $q) {
+  .factory('Facebook', function ($rootScope, $log, $q, _ ) {
     return {
       init:function(appId){
         FB.init({
