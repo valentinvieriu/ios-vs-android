@@ -1,19 +1,14 @@
 'use strict';
 
 angular.module('iosVsAndroidApp')
-.controller('MainCtrl', function($scope, $rootScope, Facebook) {
+.controller('MainCtrl', function($scope, $rootScope, Facebook, processData, fbData) {
+  
+  $scope.fb_data = {};
 
-  // button functions
-  $scope.getLoginStatus = function () {
-      Facebook.getLoginStatus();
-  };
-
-  $scope.logout = function () {
-      Facebook.logout();
-  };
-
-  $scope.unsubscribe = function () {
-      Facebook.unsubscribe();
+  $scope.uninstall = function () {
+      FB.api("/me/permissions", "DELETE", function (response) {
+          $rootScope.$broadcast('Facebook:logout');
+      });
   };
 
   $scope.appRequest = function () {
@@ -23,8 +18,19 @@ angular.module('iosVsAndroidApp')
       });
   };
 
-  $scope.share = function () {
-    Facebook.classicShare('http://ios-vs-android.herokuapp.com/');
-  };
+
+  $rootScope.$on("Facebook:connected", function () {
+    var query1 = 'SELECT uid, name,mutual_friend_count,pic_square, devices FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '+ $rootScope.config.userId + ') LIMIT 0,5000';
+    Facebook.api("/fql",{ q:query1 },function(result){
+      fbData                    = processData.bucketFriends(result.data);
+      $scope.fb_data            = fbData;
+      $rootScope.workInProgress = false;
+    });
+
+    var query2 = 'SELECT uid,pic_square, devices FROM user WHERE uid = '+ $rootScope.config.userId;
+    Facebook.api("/fql",{ q:query2 }, function(result){
+      $scope.fb_data.userData = result.data;
+    });
+  });
 
 });

@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="iosVsAndroidApp">
+  <body ng-app="iosVsAndroidApp" ng-controller="AuthenticationCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -37,8 +37,6 @@
     <!-- Add your site or application content here -->
     <div class="background"></div>
     <div class="container" ng-view=""></div>
-
-    <fb app-id="390729450981027"></fb>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -66,17 +64,21 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/angular-facebook/lib/angular-facebook.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/services/FacebookProvider.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/login.js"></script>
     <script src="scripts/services/processData.js"></script>
     <script src="scripts/filters/percent.js"></script>
     <script src="scripts/services/_.js"></script>
+    <script src="scripts/services/fbdata.js"></script>
+    <script src="scripts/directives/facepile.js"></script>
+    <script src="scripts/controllers/authentication.js"></script>
+    <script src="scripts/directives/simpleshare.js"></script>
     <!-- endbuild -->
 </body>
 </html>
