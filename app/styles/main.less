@@ -15,20 +15,7 @@ body {
 #search-box {
   margin-bottom: @line-height-computed;
 }
-// .list-group-item.ng-hide-add,
-// .list-group-item.ng-hide-remove {
-//   @include transition(0.2s linear all);
-//   display:block!important;
-// }
 
-// .list-group-item.ng-hide-add.ng-hide-add-active,
-// .list-group-item.ng-hide-remove {
-//   @include opacity(0);
-// }
-// .list-group-item.ng-hide-add,
-// .list-group-item.ng-hide-remove.ng-hide-remove-active {
-//   @include opacity(1)
-// }
 .list-group-item {
   img {
     @media (max-width: @screen-xs) {
@@ -36,11 +23,6 @@ body {
     }
   }
 }
-// .accelerate {
-//   @include translateZ(0);
-//   @include transform-style(preserve-3d);
-//   @include backface-visibility(hidden);
-// }
 
 .container {
   transform:translateZ(0);
@@ -54,16 +36,6 @@ body {
   background-color: rgba(255,255,255,0.9);
 }
 
-.wrapper {
-  // min-height: 460px;
-  position : absolute;
-  top      : 0;
-  left     : 0;
-  display  : table;
-  overflow : hidden;
-  width    : 100%;
-  height   : 100%;
-}
 .scene,
 .layer {
   display : block;
@@ -80,12 +52,13 @@ body {
   background-color : #F4F4F4;
 }
 .background {
-  position        : absolute;
-  top             : -15%;
-  bottom          : -15%;
-  left            : -15%;
-  width           : 130%;
-  background      : url(../images/background1.jpg) no-repeat 50% 100%;
+  position        : fixed;
+  top             : 0;
+  bottom          : 0;
+  left            : 0;
+  width           : 100%;
+  background      : url(../images/background1.jpg) no-repeat 50% 50%;
   background-size : cover;
+  transform:translateZ(0);
 }
 
