@@ -18,19 +18,32 @@ angular.module('iosVsAndroidApp')
       });
   };
 
+  $scope.$watch(
+    function(){
+      return $rootScope.config.logged_in
+    },
+    function(newVal) {
+      if (newVal){
+        //Get the list of friends
+        Facebook.api("/fql",{ 
+            q:'SELECT uid, name,mutual_friend_count,pic_square, devices FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '+ $rootScope.config.userId + ') LIMIT 0,5000' 
+          },
+          function(result){
+            fbData                    = processData.bucketFriends(result.data);
+            $scope.fb_data            = fbData;
+            $rootScope.workInProgress = false;
+          });
 
-  $rootScope.$on("Facebook:connected", function () {
-    var query1 = 'SELECT uid, name,mutual_friend_count,pic_square, devices FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '+ $rootScope.config.userId + ') LIMIT 0,5000';
-    Facebook.api("/fql",{ q:query1 },function(result){
-      fbData                    = processData.bucketFriends(result.data);
-      $scope.fb_data            = fbData;
-      $rootScope.workInProgress = false;
-    });
+        //get user profile
+        Facebook.api("/fql",{ 
+            q:'SELECT uid,pic_square, devices FROM user WHERE uid = '+ $rootScope.config.userId
+          },
+          function(result){
+            $scope.fb_data.userData = result.data;
+          });
+      }
+    }
+  );
 
-    var query2 = 'SELECT uid,pic_square, devices FROM user WHERE uid = '+ $rootScope.config.userId;
-    Facebook.api("/fql",{ q:query2 }, function(result){
-      $scope.fb_data.userData = result.data;
-    });
-  });
 
 });
